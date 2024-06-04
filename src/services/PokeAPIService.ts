@@ -15,6 +15,8 @@ interface PokemonResponse {
 }
 
 interface PokemonDetail {
+    weight: number;
+    height: number;
     id: number;
     name: string;
     sprites: {

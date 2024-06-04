@@ -18,19 +18,27 @@ const router = createRouter({
       component: Party
     },
     {
-      path: '/pokemon:id',
+      path: '/pokemon/:id',
       name: 'pokemon',
-      component: Pokemon
+      component: Pokemon,
+      beforeEnter: (to, from, next) => {
+        const id = Number(to.params.id);
+        if (!isNaN(id) && id > 0 && id <= 151) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/trainer',
       name: 'trainer',
       component: Trainer
     },
-    // {
-    //   path: '/:pathMatch(.*)*',
-    //   redirect: '/'
-    // }
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
+    }
   ]
 })
 

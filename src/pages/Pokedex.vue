@@ -1,8 +1,7 @@
 <template>
   <Header />
-  <div>
     <div class="pokemon-list">
-      <div v-for="pokemon in pokemons" :key="pokemon.id" class="pokemon-card">
+      <router-link v-for="pokemon in pokemons" :key="pokemon.id" :to="`/pokemon/${pokemon.id}`" class="pokemon-card" :style="{ borderColor: getColor(pokemon.types[0]) }">
         <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
         <div class="pokemon-info">
           <h2>{{ pokemon.name }}</h2>
@@ -10,9 +9,8 @@
           <p v-if="pokemon.types.length > 0">Type 1: {{ pokemon.types[0] }}</p>
           <p v-if="pokemon.types.length > 1">Type 2: {{ pokemon.types[1] }}</p>
         </div>
-      </div>
+      </router-link>
     </div>
-  </div>
 </template>
 
 <script scoped lang="ts">
@@ -20,6 +18,7 @@
 import Header from "@/pages/Header.vue";
 import { defineComponent } from 'vue';
 import PokeAPIService from '@/services/PokeAPIService';
+import { PokeColors } from '@/types/colors.enum';
 
 interface Pokemon {
   id: number;
@@ -37,6 +36,11 @@ export default defineComponent({
     return {
       pokemons: [] as Pokemon[]
     };
+  },
+  methods: {
+    getColor(type: string): string {
+      return PokeColors[type as keyof typeof PokeColors] || '#ccc';
+    }
   },
   async created() {
     try {
@@ -68,18 +72,27 @@ export default defineComponent({
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 100px;
-  width: 98vw; /* Alterado para ocupar toda a largura da tela */
-  padding-left: 20px;
-  padding-right: 20px;
 }
 
 .pokemon-card {
-  border: 1px solid #ccc;
+  border: 5px solid #ccc;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
   width: 200px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .pokemon-image {
