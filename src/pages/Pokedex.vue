@@ -3,8 +3,8 @@
     <div class="pokemon-list">
       <router-link v-for="pokemon in pokemons" :key="pokemon.id" :to="`/pokemon/${pokemon.id}`" class="pokemon-card" :style="{ borderColor: getColor(pokemon.types[0]) }">
         <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
+        <h2>{{ pokemon.name }}</h2>
         <div class="pokemon-info">
-          <h2>{{ pokemon.name }}</h2>
           <p>ID: {{ pokemon.id }}</p>
           <p v-if="pokemon.types.length > 0">Type 1: {{ pokemon.types[0] }}</p>
           <p v-if="pokemon.types.length > 1">Type 2: {{ pokemon.types[1] }}</p>
@@ -15,7 +15,7 @@
 
 <script scoped lang="ts">
 // @ts-ignore
-import Header from "@/pages/Header.vue";
+import Header from "@/components/Header.vue";
 import { defineComponent } from 'vue';
 import PokeAPIService from '@/services/PokeAPIService';
 import { PokeColors } from '@/types/colors.enum';

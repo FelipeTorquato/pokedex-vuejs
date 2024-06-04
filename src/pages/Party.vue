@@ -4,7 +4,7 @@
 </template>
 <script scoped setup lang="ts">
 // @ts-ignore
-import Header from "@/pages/Header.vue";
+import Header from "@/components/Header.vue";
 </script>
 
 <style scoped>
