@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <h1>Ola4</h1>
+    
 </template>
 <script scoped setup lang="ts">
 // @ts-ignore
