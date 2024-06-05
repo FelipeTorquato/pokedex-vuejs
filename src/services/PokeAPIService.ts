@@ -39,7 +39,6 @@ interface PokemonDetail {
 interface Ability {
   id: number;
   name: string;
-  // Adicione mais campos conforme necessário
 }
 
 const PokeAPIService = {
